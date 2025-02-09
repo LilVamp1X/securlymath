@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Securly Math - Lessons</title>
+    <link rel="icon" type="image/png" href="https://www.pps.net/cms/lib/OR01913224/Centricity/Domain/57/securly-180x180.png">
+    <style>
+        body {
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+        .container {
+            display: flex;
+            gap: 30px;
+        }
+        .math-btn, .game-btn {
+            width: 150px;
+            height: 150px;
+            border: none;
+            background-color: white;
+            border-radius: 15px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.5s ease-in-out;
+        }
+        .math-btn:hover, .game-btn:hover {
+            transform: scale(1.2) rotate(5deg);
+        }
+        .math-btn img, .game-btn img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 15px;
+        }
+        .game-btn span {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 16px;
+            font-weight: bold;
+            color: black;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 5px 10px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="button-container">
+        <button class="math-btn" onclick="redirect('https://securlymath.com/math.htm')" onmouseover="fireSymbols('+', this)">
+            <img src="https://cdn-icons-png.flaticon.com/512/54/54414.png" alt="Addition">
+            <span>Plus</span>
+        </button>
+        <button class="math-btn" onclick="redirect('https://securlymath.com/minus.htm')" onmouseover="fireSymbols('-', this)">
+            <img src="https://www.iconpacks.net/icons/2/free-minus-icon-3108-thumb.png" alt="Subtraction">
+        </button>
+        <button class="math-btn" onclick="redirect('https://securlymath.com/times.htm')" onmouseover="fireSymbols('×', this)">
+            <img src="https://cdn-icons-png.flaticon.com/512/43/43165.png" alt="Multiplication">
+        </button>
+        <button class="math-btn" onclick="redirect('https://securlymath.com/division.htm')" onmouseover="fireSymbols('÷', this)">
+            <img src="https://cdn-icons-png.flaticon.com/512/1/1246.png" alt="Division">
+        </button>
+    </div>
+
+    <script>
+        function redirect(url) {
+            window.location.href = url;
+        }
+
+        function fireSymbols(symbol, button) {
+            for (let i = 0; i < 5; i++) {
+                let span = document.createElement('span');
+                span.classList.add('symbol');
+                span.innerText = symbol;
+                button.appendChild(span);
+                
+                let x = Math.random() * 80 - 40;
+                let y = Math.random() * 80 - 40;
+                span.style.left = '50%';
+                span.style.top = '50%';
+                span.style.transform = `translate(${x}px, ${y}px) scale(1.8)`;
+                span.style.opacity = '0';
+                
+                setTimeout(() => {
+                    span.remove();
+                }, 800);
+            }
+        }
+
+        document.addEventListener('keydown', function(event) {
+            if (event.ctrlKey && event.key === 'v') {
+                switchButtons();
+            }
+        });
+
+        function switchButtons() {
+            let container = document.getElementById('button-container');
+            container.innerHTML = `
+                <button class="game-btn" onclick="redirect('https://securlymath.com/ss.htm')">
+                    <img src="https://rocketgames.imgix.net/uploads/games/shell-shockers/shell-shockers.jpg" alt="Shell Shockers">
+                    <span>Shell Shockers</span>
+                </button>
+                <button class="game-btn" onclick="redirect('https://securlymath.com/minicraft.htm')">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/b/b6/Minecraft_2024_cover_art.png" alt="Minecraft">
+                    <span>Minecraft</span>
+                <button class="game-btn" onclick="redirect('https://securlymath.com/cookie.htm')">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8LAMx-QZh1PcM8KQ9T45nc4y2kycq14WAfg&s" alt="Minecraft">
+                    <span>Cookie Clicker</span>
+                </button>
+                <button class="game-btn" onclick="redirect('https://securlymath.com/baldi.htm')">
+                    <img src="https://m.media-amazon.com/images/I/71QL0Ixia3L.png" alt="Minecraft">
+                    <span>Baldi Basics</span>
+                </button>
+                <button class="game-btn" onclick="redirect('https://securlymath.com/fn2.htm')">
+                    <img src="https://m.media-amazon.com/images/I/41+GCaM3dcL.png">
+                    <span>Funny Shooter 2</span>
+                </button>
+                  <button class="game-btn" onclick="redirect('https://securlymath.com/paperio.htm')">
+                    <img src="https://kevin.games/assets/cache_image/games/paper-io-2_200x200_98b.jpg">
+                    <span>Paper.io</span>
+                </button>
+                
+            `;
+        }
+    </script>
+</body>
+</html>
