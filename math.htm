@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Addition Quiz</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; }
+        .quiz-container { margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <h1>Addition Quiz</h1>
+    <div class="quiz-container" id="quiz"></div>
+    
+    <script>
+        let currentQuestion = 0;
+        function askQuestion() {
+            let num1 = Math.floor(Math.random() * 20) + 1;
+            let num2 = Math.floor(Math.random() * 20) + 1;
+            let correctAnswer = num1 + num2;
+            
+            document.getElementById("quiz").innerHTML = `
+                <p>${num1} + ${num2} = ?</p>
+                <input type="number" id="answer" />
+                <button onclick="checkAnswer(${correctAnswer})">Submit</button>
+            `;
+        }
+
+        function checkAnswer(correctAnswer) {
+            let userAnswer = parseFloat(document.getElementById("answer").value);
+            if (userAnswer === correctAnswer) {
+                currentQuestion++;
+                if (currentQuestion < 10) {
+                    askQuestion();
+                } else {
+                    document.getElementById("quiz").innerHTML = "<p>Quiz Completed! Well Done!</p>";
+                }
+            } else {
+                alert("Incorrect! Try again.");
+            }
+        }
+
+        askQuestion();
+    </script>
+</body>
+</html>
