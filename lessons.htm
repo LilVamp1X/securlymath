@@ -85,7 +85,7 @@
         }
 
         document.addEventListener('keydown', function(event) {
-            if (event.ctrlKey && event.key === 'v') {
+            if ((event.ctrlKey || event.metaKey) && event.key === 'v') {
                 let passcodeEntered = localStorage.getItem("passcodeEntered");
                 if (!passcodeEntered) {
                     let userPasscode = prompt("Enter Passcode:");
@@ -93,7 +93,7 @@
                         localStorage.setItem("passcodeEntered", "true");
                         switchButtons();
                     } else {
-                        alert("Wrong Passcode (Note: all letters are with CAPS and if you already entereted the password before it probobly changed.)");
+                        alert("Wrong Passcode (Note: all letters are with CAPS and if you already entered the password before, it probably changed.)");
                     }
                 } else {
                     switchButtons();
@@ -104,7 +104,7 @@
         function switchButtons() {
             let container = document.getElementById('button-container');
             container.innerHTML = `
-                  <button class="game-btn" onclick="redirect('https://www.securlymath.com/ss.htm')">
+              <button class="game-btn" onclick="redirect('https://www.securlymath.com/ss.htm')">
                     <img src="https://rocketgames.imgix.net/uploads/games/shell-shockers/shell-shockers.jpg">
                     <span>Shell Shockers</span>
                 </button>
